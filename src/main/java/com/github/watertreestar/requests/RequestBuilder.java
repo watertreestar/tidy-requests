@@ -23,7 +23,8 @@ public class RequestBuilder {
     Charset charset = StandardCharsets.UTF_8;
     @Nullable
     Request.RequestBody<?> body;
-    int socketTimeout = 10000;
+    int readTimeout = 10000;
+    int writeTimeout = 10000;
     int connectTimeout = 10000;
     String userAgent;
     @Nullable
@@ -165,6 +166,21 @@ public class RequestBuilder {
 
     public RequestBuilder userAgent(String userAgent) {
         this.userAgent = userAgent;
+        return this;
+    }
+
+    public RequestBuilder connectTimeout(int connectTimeout) {
+        this.connectTimeout = connectTimeout;
+        return this;
+    }
+
+    public RequestBuilder readTimeout(int readTimeout) {
+        this.readTimeout = readTimeout;
+        return this;
+    }
+
+    public RequestBuilder writeTimeout(int writeTimeout) {
+        this.writeTimeout = writeTimeout;
         return this;
     }
 }
