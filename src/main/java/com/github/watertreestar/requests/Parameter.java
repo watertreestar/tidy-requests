@@ -1,14 +1,23 @@
 package com.github.watertreestar.requests;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class Parameter<T> implements Map.Entry<String, T> {
-    private final String name;
-    private final T value;
+public class Parameter<T> implements Map.Entry<String, T>, Serializable {
+    protected final String name;
+    protected final T value;
 
     public Parameter(String name, T value) {
         this.name = name;
         this.value = value;
+    }
+
+    public String name() {
+        return this.name;
+    }
+
+    public T value() {
+        return this.value;
     }
 
     @Override

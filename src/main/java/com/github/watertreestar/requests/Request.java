@@ -1,15 +1,17 @@
 package com.github.watertreestar.requests;
 
-import com.github.watertreestar.requests.constant.HttpMethods;
+import com.github.watertreestar.requests.constant.HttpMethod;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.io.Serializable;
+import java.net.Proxy;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.Map;
 
 public class Request {
-    private final HttpMethods method;
+    private final HttpMethod method;
     private final URL url;
     private final Collection<? extends Map.Entry<String, ?>> headers;
     private final Collection<? extends Map.Entry<String, ?>> cookies;
@@ -19,6 +21,9 @@ public class Request {
     private final int connectTimeout;
     private final int readTimeout;
     private final int writeTimeout;
+    @Nullable
+    private final Proxy proxy;
+
 
     public Request(RequestBuilder builder) {
         this.method = builder.method;
@@ -31,6 +36,51 @@ public class Request {
         this.connectTimeout = builder.connectTimeout;
         this.readTimeout = builder.readTimeout;
         this.writeTimeout = builder.writeTimeout;
+        this.proxy = builder.proxy;
+    }
+
+    public HttpMethod method() {
+        return this.method;
+    }
+
+    public URL url() {
+        return this.url;
+    }
+
+    public Collection<? extends Map.Entry<String, ?>> headers() {
+        return this.headers;
+    }
+
+    public Collection<? extends Map.Entry<String, ?>> parameters() {
+        return this.parameters;
+    }
+
+    public Collection<? extends Map.Entry<String, ?>> cookies() {
+        return this.cookies;
+    }
+
+    public String userAgent() {
+        return this.userAgent;
+    }
+
+    public Charset charset() {
+        return this.charset;
+    }
+
+    public int connectTimeout() {
+        return this.connectTimeout;
+    }
+
+    public int readTimeout() {
+        return this.readTimeout;
+    }
+
+    public int writeTimeout() {
+        return this.writeTimeout;
+    }
+
+    public Proxy proxy() {
+        return this.proxy;
     }
 
     public static abstract class RequestBody<T> implements Serializable {

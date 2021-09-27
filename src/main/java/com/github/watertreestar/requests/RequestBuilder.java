@@ -1,21 +1,19 @@
 package com.github.watertreestar.requests;
 
-import com.github.watertreestar.requests.constant.HttpMethods;
+import com.github.watertreestar.requests.constant.HttpMethod;
 import com.github.watertreestar.requests.exception.RequestsException;
 import com.sun.istack.internal.Nullable;
 
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.security.KeyStore;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class RequestBuilder {
-    HttpMethods method = HttpMethods.GET;
+    HttpMethod method = HttpMethod.GET;
     URL url;
     Collection<? extends Map.Entry<String, ?>> headers = new ArrayList<>();
     Collection<? extends Map.Entry<String, ?>> cookies = new ArrayList<>();
@@ -29,13 +27,6 @@ public class RequestBuilder {
     String userAgent;
     @Nullable
     Proxy proxy;
-    boolean followRedirect = true;
-    int maxRedirectCount = 5;
-    boolean acceptCompress = true;
-    boolean verify = true;;
-    boolean keepAlive = true;
-    @Nullable
-    KeyStore keyStore;
 
 
     RequestBuilder() {
@@ -45,7 +36,7 @@ public class RequestBuilder {
 
     }
 
-    public RequestBuilder method(HttpMethods method) {
+    public RequestBuilder method(HttpMethod method) {
         this.method = Objects.requireNonNull(method);
         return this;
     }

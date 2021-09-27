@@ -1,6 +1,6 @@
 package com.github.watertreestar.requests.constant;
 
-public enum HttpMethods {
+public enum HttpMethod {
     GET("GET"),
     POST("POST"),
     PUT("PUT"),
@@ -11,7 +11,7 @@ public enum HttpMethods {
     OPTIONS("OPTIONS"),
     CONNECT("CONNECT");
 
-    HttpMethods(String name) {
+    HttpMethod(String name) {
         this.name = name;
     }
 

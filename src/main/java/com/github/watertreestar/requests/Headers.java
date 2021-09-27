@@ -2,6 +2,7 @@ package com.github.watertreestar.requests;
 
 import com.github.watertreestar.requests.constant.HttpHeaders;
 
+import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.UnsupportedCharsetException;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Headers {
+public class Headers implements Serializable {
     private final List<Header> headers;
 
     public Headers() {
@@ -33,6 +34,7 @@ public class Headers {
     public List<Header> getHeaders() {
         return headers;
     }
+
 
     public Charset getCharset(Charset defaultCharset) {
         String contentType = this.getHeader(HttpHeaders.NAME_CONTENT_TYPE);
