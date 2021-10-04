@@ -22,12 +22,21 @@ public class AbstractResponse {
      * 响应头
      */
     protected final Headers headers;
+    /**
+     * HTTP method
+     */
+    protected String method;
+    /**
+     * 该响应对应的请求
+     */
+    protected Request request;
 
-    protected AbstractResponse(String url, int statusCode, List<Cookie> cookies, Headers headers) {
+    protected AbstractResponse(String url, int statusCode, List<Cookie> cookies, Headers headers, Request request) {
         this.url = url;
         this.statusCode = statusCode;
         this.cookies = Collections.unmodifiableList(cookies);
         this.headers = headers;
+        this.request = request;
     }
 
     /**
@@ -38,7 +47,15 @@ public class AbstractResponse {
     }
 
     /**
+     * http method
+     * @return
+     */
+    public String method() {
+        return method;
+    }
+    /**
      * return response status code
+     *
      * @return status code
      */
     public int statusCode() {
@@ -87,4 +104,6 @@ public class AbstractResponse {
     public List<String> getHeaders(String name) {
         return this.headers.getHeaders(name);
     }
+
+
 }

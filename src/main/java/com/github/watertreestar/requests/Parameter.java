@@ -12,6 +12,10 @@ public class Parameter<T> implements Map.Entry<String, T>, Serializable {
         this.value = value;
     }
 
+    public static <V> Parameter<V> of(String name, V value) {
+        return new Parameter<>(name, value);
+    }
+
     public String name() {
         return this.name;
     }
