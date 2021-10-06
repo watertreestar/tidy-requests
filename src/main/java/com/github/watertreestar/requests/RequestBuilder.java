@@ -2,6 +2,7 @@ package com.github.watertreestar.requests;
 
 import com.github.watertreestar.requests.constant.HttpMethod;
 import com.github.watertreestar.requests.exception.RequestsException;
+import com.github.watertreestar.requests.session.SessionContext;
 import com.sun.istack.internal.Nullable;
 
 import java.net.MalformedURLException;
@@ -9,6 +10,7 @@ import java.net.Proxy;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.security.KeyStore;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,13 +22,19 @@ public class RequestBuilder {
     Collection<? extends Map.Entry<String, ?>> params = new ArrayList<>();
     Charset charset = StandardCharsets.UTF_8;
     @Nullable
-    Request.RequestBody<?> body;
     int readTimeout = 10000;
     int writeTimeout = 10000;
     int connectTimeout = 10000;
     String userAgent;
     @Nullable
     Proxy proxy;
+    SessionContext sessionContext;
+    Request.RequestBody<?> requestBody;
+    boolean verify;
+    KeyStore keyStore;
+    BasicAuth basicAuth;
+    boolean useCompress;
+    boolean keepAlive;
 
 
     RequestBuilder() {
@@ -147,14 +155,6 @@ public class RequestBuilder {
         return this;
     }
 
-    /**
-     * Set request body
-     */
-    public RequestBuilder body(@Nullable Request.RequestBody<?> body) {
-        this.body = body;
-        return this;
-    }
-
     public RequestBuilder userAgent(String userAgent) {
         this.userAgent = userAgent;
         return this;
@@ -173,5 +173,60 @@ public class RequestBuilder {
     public RequestBuilder writeTimeout(int writeTimeout) {
         this.writeTimeout = writeTimeout;
         return this;
+    }
+
+    public RequestBuilder sessionContext(SessionContext sessionContext) {
+        this.sessionContext = sessionContext;
+        return this;
+    }
+
+    public RequestBuilder body(Request.RequestBody<?> requestBody) {
+        this.requestBody = requestBody;
+        return this;
+    }
+
+    public RequestBuilder verify(boolean verify) {
+        this.verify = verify;
+        return this;
+    }
+
+    public boolean verify() {
+        return this.verify;
+    }
+
+    public RequestBuilder keyStore(KeyStore keyStore) {
+        this.keyStore = keyStore;
+        return this;
+    }
+
+    public KeyStore keyStore() {
+        return this.keyStore;
+    }
+
+    public RequestBuilder basicAuth(BasicAuth basicAuth) {
+        this.basicAuth = basicAuth;
+        return this;
+    }
+
+    public BasicAuth basicAuth() {
+        return basicAuth;
+    }
+
+    public boolean useCompress() {
+        return this.useCompress;
+    }
+
+    public RequestBuilder useCompress(boolean useCompress) {
+        this.useCompress = useCompress;
+        return this;
+    }
+
+    public RequestBuilder keepAlive(boolean keepAlive) {
+        this.keepAlive = keepAlive;
+        return this;
+    }
+
+    public boolean keepAlive() {
+        return this.keepAlive;
     }
 }

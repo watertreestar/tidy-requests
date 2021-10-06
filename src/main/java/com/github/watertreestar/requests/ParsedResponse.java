@@ -12,12 +12,12 @@ import java.util.List;
 public class ParsedResponse<T> extends AbstractResponse implements Serializable {
     private T body;
 
-    protected ParsedResponse(String url, int statusCode, List<Cookie> cookies, Headers headers) {
-        super(url, statusCode, cookies, headers);
+    protected ParsedResponse(String url, int statusCode, List<Cookie> cookies, Headers headers, Request request) {
+        super(url, statusCode, cookies, headers, request);
     }
 
-    public ParsedResponse(String url, int statusCode, List<Cookie> cookies, Headers headers, T body) {
-        this(url, statusCode, cookies, headers);
+    public ParsedResponse(String url, int statusCode, List<Cookie> cookies, Headers headers, T body, Request request) {
+        this(url, statusCode, cookies, headers, request);
         this.body = body;
     }
 

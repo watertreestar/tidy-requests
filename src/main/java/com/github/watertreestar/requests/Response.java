@@ -31,13 +31,13 @@ public class Response extends AbstractResponse implements AutoCloseable {
 
 
     public Response(String method, String url, int statusCode, String statusLine, List<Cookie> cookies,
-                    Headers headers, InputStream body, @Nullable Charset charset, boolean decompress, Request request) {
+                    Headers headers, InputStream body,  Request request) {
         super(url, statusCode, cookies, headers, request);
         this.method = method;
         this.statusLine = statusLine;
         this.body = body;
-        this.charset = charset;
-        this.decompress = decompress;
+        this.charset = null;
+        this.decompress = request.useCompress();
     }
 
     public InputStream body() {
@@ -72,7 +72,7 @@ public class Response extends AbstractResponse implements AutoCloseable {
     }
 
     public ParsedResponse<String> toTextResponse() {
-        return new ParsedResponse<>(this.url, this.statusCode, this.cookies, this.headers, this.readToText());
+        return new ParsedResponse<>(this.url, this.statusCode, this.cookies, this.headers, this.readToText(), request);
     }
 
     /**
@@ -88,7 +88,7 @@ public class Response extends AbstractResponse implements AutoCloseable {
      * @return
      */
     public ParsedResponse<byte[]> toByteResponse() {
-        return new ParsedResponse<>(this.url, this.statusCode, this.cookies, this.headers, this.readToBytes());
+        return new ParsedResponse<>(this.url, this.statusCode, this.cookies, this.headers, this.readToBytes(), request);
     }
 
     private Charset getCharset() {

@@ -8,4 +8,8 @@ public class RequestsException extends RuntimeException {
     public RequestsException(Throwable e) {
         super(e);
     }
+
+    public RequestsException(String message) {
+        super(message);
+    }
 }
