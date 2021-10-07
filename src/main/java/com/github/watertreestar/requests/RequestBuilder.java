@@ -2,9 +2,12 @@ package com.github.watertreestar.requests;
 
 import com.github.watertreestar.requests.constant.HttpMethod;
 import com.github.watertreestar.requests.exception.RequestsException;
+import com.github.watertreestar.requests.executor.HttpExecutor;
+import com.github.watertreestar.requests.factory.RequestsFactory;
 import com.github.watertreestar.requests.session.SessionContext;
 import com.sun.istack.internal.Nullable;
 
+import javax.print.DocFlavor;
 import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
@@ -42,6 +45,15 @@ public class RequestBuilder {
 
     RequestBuilder(Request request) {
 
+    }
+
+    public Request toRequest() {
+        return new Request(this);
+    }
+
+    public Response send() {
+        HttpExecutor executor = RequestsFactory.getInstance().httpExecutor();
+        return executor.proceed(this.toRequest());
     }
 
     public RequestBuilder method(HttpMethod method) {
