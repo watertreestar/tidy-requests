@@ -28,7 +28,7 @@ public class RequestBuilder {
     int readTimeout = 10000;
     int writeTimeout = 10000;
     int connectTimeout = 10000;
-    String userAgent;
+    String userAgent = "Requests 5.0.3, Java " + System.getProperty("java.version");
     @Nullable
     Proxy proxy;
     SessionContext sessionContext;
@@ -38,6 +38,7 @@ public class RequestBuilder {
     BasicAuth basicAuth;
     boolean useCompress;
     boolean keepAlive;
+    List<Interceptor> interceptors = new ArrayList<>();
 
 
     RequestBuilder() {
@@ -53,7 +54,8 @@ public class RequestBuilder {
 
     public Response send() {
         HttpExecutor executor = RequestsFactory.getInstance().httpExecutor();
-        return executor.proceed(this.toRequest());
+        InterceptorChain interceptorChain = new InterceptorChain(this.interceptors, executor);
+        return interceptorChain.proceed(toRequest());
     }
 
     public RequestBuilder method(HttpMethod method) {
@@ -240,5 +242,10 @@ public class RequestBuilder {
 
     public boolean keepAlive() {
         return this.keepAlive;
+    }
+
+    public RequestBuilder interceptor(Interceptor interceptor) {
+        this.interceptors.add(interceptor);
+        return this;
     }
 }

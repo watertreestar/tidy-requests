@@ -6,6 +6,8 @@ public class RequestsTest {
 
     @Test
     public void test() {
-        Requests.get("http://baidu.com");
+        ParsedResponse response = Requests.get("https://baidu.com").send().toTextResponse();
+        System.out.println(response.statusCode());
+        System.out.println(response.content());
     }
 }

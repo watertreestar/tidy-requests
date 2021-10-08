@@ -40,7 +40,6 @@ public class StatusCode {
     public static final int REQUESTED_RANGE_NOT_SATISFIABLE = 416;
     public static final int EXPECTATION_FAILED = 417;
 
-
     public static final int INTERNAL_SERVER_ERROR = 500;
     public static final int NOT_IMPLEMENTED = 501;
     public static final int BAD_GATEWAY = 502;

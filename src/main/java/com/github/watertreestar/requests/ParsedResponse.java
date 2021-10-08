@@ -1,12 +1,13 @@
 package com.github.watertreestar.requests;
 
-import java.io.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Parsed response from {@code Response}
  * <p>该response是经过转换后的response. {@link Response}只是包含了响应流，
  * ParsedResponse是从response stream中根据不同的content-type convert而来
+ *
  * @param <T>
  */
 public class ParsedResponse<T> extends AbstractResponse implements Serializable {
@@ -25,4 +26,7 @@ public class ParsedResponse<T> extends AbstractResponse implements Serializable 
         return body;
     }
 
+    public T content() {
+        return body;
+    }
 }
