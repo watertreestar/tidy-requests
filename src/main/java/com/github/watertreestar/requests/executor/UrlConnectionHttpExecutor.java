@@ -80,8 +80,11 @@ public class UrlConnectionHttpExecutor implements HttpExecutor {
                 conn.setRequestProperty(HttpHeaders.NAME_COOKIE, cookieStr);
             }
         }
-
-
+        /**
+         * 如果是HTTPS访问：
+         * 1. 信任所有host
+         * 2. 配置CA
+         */
         // deal with https
         if (conn instanceof HttpsURLConnection) {
             HttpsURLConnection httpsConn = (HttpsURLConnection) conn;
