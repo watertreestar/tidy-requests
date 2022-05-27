@@ -6,17 +6,25 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.List;
 
+/**
+ * 请求过滤器链
+ */
 public class InterceptorChain implements Interceptor.InvocationTarget {
-    private HttpExecutor executor;
+    /**
+     * 最终执行请求的执行器
+     */
+    private final HttpExecutor executor;
 
-    private List<Interceptor> interceptorList;
+    /**
+     * 过滤器链
+     */
+    private final List<Interceptor> interceptorList;
 
 
     public InterceptorChain(List<Interceptor> interceptorList, HttpExecutor executor) {
         this.executor = executor;
         this.interceptorList = interceptorList;
     }
-
 
     @Override
     public @NonNull Response proceed(Request request) {

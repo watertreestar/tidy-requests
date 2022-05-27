@@ -102,7 +102,7 @@ public class SSLSocketMaker {
             TrustManagerFactory trustManagerFactory;
             try {
                 trustManagerFactory = TrustManagerFactory.getInstance("SunX509", "SunJSSE");
-                trustManagerFactory.init(keyStore);
+                trustManagerFactory.init(this.keyStore);
             } catch (NoSuchAlgorithmException | NoSuchProviderException | KeyStoreException e) {
                 throw new TrustManagerLoadFailedException(e);
             }

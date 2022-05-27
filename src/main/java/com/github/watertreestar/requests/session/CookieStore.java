@@ -2,6 +2,7 @@ package com.github.watertreestar.requests.session;
 
 import com.github.watertreestar.requests.Cookie;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface CookieStore {
 
     List<Cookie> getCookies(URL url);
 
-    List<Cookie> getCookies(String url);
+    List<Cookie> getCookies(String url) throws MalformedURLException;
 
     List<Cookie> allCookies();
 }

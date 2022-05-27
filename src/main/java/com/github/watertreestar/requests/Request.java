@@ -34,6 +34,7 @@ public class Request {
     private final BasicAuth basicAuth;
     private final boolean useCompress;
     private final boolean keepAlive;
+    private final boolean redirect;
 
 
     public Request(RequestBuilder builder) {
@@ -55,6 +56,7 @@ public class Request {
         this.basicAuth = builder.basicAuth;
         this.useCompress = builder.useCompress;
         this.keepAlive = builder.keepAlive;
+        this.redirect = builder.redirect;
     }
 
     public HttpMethod method() {
@@ -131,6 +133,10 @@ public class Request {
 
     public boolean keepAlive() {
         return this.keepAlive;
+    }
+
+    public boolean allowRedirect() {
+        return this.redirect;
     }
 
     /**

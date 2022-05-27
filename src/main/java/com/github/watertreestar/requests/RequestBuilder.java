@@ -7,7 +7,6 @@ import com.github.watertreestar.requests.factory.RequestsFactory;
 import com.github.watertreestar.requests.session.SessionContext;
 import com.sun.istack.internal.Nullable;
 
-import javax.print.DocFlavor;
 import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
@@ -28,7 +27,7 @@ public class RequestBuilder {
     int readTimeout = 10000;
     int writeTimeout = 10000;
     int connectTimeout = 10000;
-    String userAgent = "Requests 5.0.3, Java " + System.getProperty("java.version");
+    String userAgent = "Requests 1.0.0, Java " + System.getProperty("java.version");
     @Nullable
     Proxy proxy;
     SessionContext sessionContext;
@@ -39,14 +38,10 @@ public class RequestBuilder {
     boolean useCompress;
     boolean keepAlive;
     List<Interceptor> interceptors = new ArrayList<>();
+    boolean redirect;
 
+    public RequestBuilder() {}
 
-    RequestBuilder() {
-    }
-
-    RequestBuilder(Request request) {
-
-    }
 
     public Request toRequest() {
         return new Request(this);
@@ -246,6 +241,11 @@ public class RequestBuilder {
 
     public RequestBuilder interceptor(Interceptor interceptor) {
         this.interceptors.add(interceptor);
+        return this;
+    }
+
+    public RequestBuilder redirect(boolean allow) {
+        this.redirect = allow;
         return this;
     }
 }

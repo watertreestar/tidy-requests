@@ -1,6 +1,8 @@
 package com.github.watertreestar.requests;
 
 import com.github.watertreestar.requests.constant.HttpMethod;
+import com.github.watertreestar.requests.session.DefaultSessionContext;
+import com.github.watertreestar.requests.session.Session;
 
 public class Requests {
     public static RequestBuilder get(String url) {
@@ -37,6 +39,10 @@ public class Requests {
 
     public static RequestBuilder head(String url){
         return buildRequest(url, HttpMethod.HEAD);
+    }
+
+    public static Session session() {
+        return new Session(new DefaultSessionContext());
     }
 
     private static RequestBuilder buildRequest(String url, HttpMethod method) {

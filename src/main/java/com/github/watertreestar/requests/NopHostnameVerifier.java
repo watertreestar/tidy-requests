@@ -6,7 +6,7 @@ import javax.net.ssl.SSLSession;
 public class NopHostnameVerifier implements HostnameVerifier {
 
     private static class Holder {
-        private static NopHostnameVerifier instance = new NopHostnameVerifier();
+        private static final NopHostnameVerifier instance = new NopHostnameVerifier();
     }
 
     public static HostnameVerifier getInstance() {

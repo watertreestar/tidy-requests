@@ -5,7 +5,7 @@ import java.util.Map;
 
 import static java.util.Objects.requireNonNull;
 
-public class Cookie extends Parameter<String> implements Map.Entry<String,String>, Serializable {
+public class Cookie extends Parameter<String> implements Map.Entry<String, String>, Serializable {
     /**
      * The cookie domain set by attribute or from url
      */
@@ -36,6 +36,10 @@ public class Cookie extends Parameter<String> implements Map.Entry<String,String
         this.expiry = expiry;
         this.secure = secure;
         this.hostOnly = hostOnly;
+    }
+
+    public Key key() {
+        return new Key(this.domain, this.path, this.name);
     }
 
     /**
@@ -144,5 +148,44 @@ public class Cookie extends Parameter<String> implements Map.Entry<String,String
                 ", secure=" + secure +
                 ", hostOnly=" + hostOnly +
                 '}';
+    }
+
+    public static class Key {
+        /**
+         * The cookie domain set by attribute or from url
+         */
+        private final String domain;
+        /**
+         * The cookie path set by attribute or from url
+         */
+        private final String path;
+
+        private final String name;
+
+        public Key(String domain, String path, String name) {
+            this.domain = domain;
+            this.path = path;
+            this.name = name;
+        }
+
+         @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Key cookieKey = (Key) o;
+
+            if (!domain.equals(cookieKey.domain)) return false;
+            if (!path.equals(cookieKey.path)) return false;
+            return name.equals(cookieKey.name);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = domain.hashCode();
+            result = 31 * result + path.hashCode();
+            result = 31 * result + name.hashCode();
+            return result;
+        }
     }
 }
